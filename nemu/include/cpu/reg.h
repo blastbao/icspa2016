@@ -29,8 +29,13 @@ typedef struct SREG {
 	uint32_t limit;
 } sreg;
 
+
+
+
 typedef struct {
 	union {
+
+		// 分配 8 * 32(max) 大小内存，模拟 8 个通用寄存器。
 		union {
 			uint32_t _32;
 			uint16_t _16;
@@ -66,12 +71,15 @@ typedef struct {
 				uint32_t eflags;
 			};
 		};
+
 	};
+
 	struct GDTR
 	{
 		uint32_t base_addr;
 		uint16_t seg_limit;
 	} gdtr, idtr;
+
 	CR0 cr0;
 	CR3 cr3;
 	sreg s_reg[6];

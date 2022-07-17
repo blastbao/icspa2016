@@ -3,16 +3,26 @@
 #define instr and
 
 static void do_execute () {
+
+
 	DATA_TYPE result = op_dest->val & op_src->val;
 	int len = (DATA_BYTE << 3) - 1;
+
+
 	int s1, s2;
+
 	cpu.CF = (result < op_dest->val);
 	cpu.SF = result >> len;
+
 	s1 = op_dest->val >> len;
 	s2 = op_src->val >> len;
+
 	cpu.OF = (s1 == s2 && s1 != cpu.SF) ;
 	cpu.ZF = !result;
+
 	OPERAND_W(op_dest, result);
+
+
 	int count = 0;
 	int i = 1;
 	for (i = 1; i <= 8; i++)
@@ -20,9 +30,14 @@ static void do_execute () {
 		count += result % 2;
 		result /= 2;
 	}
+
+
 	if (count % 2 == 0)
 		cpu.PF = 1;
-	else cpu.PF = 0;
+	else 
+		cpu.PF = 0;
+
+	
 	print_asm_template2();
 }
 

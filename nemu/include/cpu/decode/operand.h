@@ -5,14 +5,16 @@ enum { OP_TYPE_REG, OP_TYPE_MEM, OP_TYPE_IMM };
 
 #define OP_STR_SIZE 40
 
+
+// 操作数
 typedef struct {
-	uint32_t type;
-	size_t size;
+	uint32_t type;				// 类型
+	size_t size;				// 大小
 	union {
-		uint32_t reg;
+		uint32_t reg;			// 寄存器
 		struct {
-			swaddr_t addr;
-			uint8_t sregister;
+			swaddr_t addr;		// 地址
+			uint8_t sregister;	// 
 		};
 		uint32_t imm;
 		int32_t simm;
@@ -21,10 +23,14 @@ typedef struct {
 	char str[OP_STR_SIZE];
 } Operand;
 
+
+
 typedef struct {
 	uint32_t opcode;
 	bool is_operand_size_16;
 	Operand src, dest, src2;
 } Operands;
+
+
 
 #endif
